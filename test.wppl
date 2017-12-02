@@ -26,7 +26,6 @@ var getResults = function() {
 		var humor = filter(function(x) {if (x[1] === humor) return x;}, each_book_tags);
 		// display("There are " + user_books_only.length + " books we will train on for User " + user_id );
 
-
 		/* Get the genre preference of the user */
 		var all = [classics.length, fantasy.length, fic.length, nfic.length, ya.length, scifi.length, mystery.length, humor.length];
 		var all = sort(all, gt);
