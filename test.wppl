@@ -92,7 +92,7 @@ var getResults = function() {
 		  var book = {genre: bookgenre, popular: popularity}; // Put data from real book here
 		  return reads(book, newUser);
 		}
-		readBook();
+		return readBook();
 	} else {
 		getResults();
 	}
@@ -113,3 +113,6 @@ var ratings   = csv.read('ratings.csv');
 var book_tags = csv.read('book_tags.csv');
 var books     = csv.read('books.csv');
 getResults();
+
+var first = Infer({method: 'forward', samples: 5}, function(){return getResults()});
+// viz(first)
