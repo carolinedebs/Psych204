@@ -6,18 +6,19 @@
 
 var genres = ['classics', 'fantasy', 'fiction', 'nonfiction', 'YA', 'scifi', 'mystery', 'humor'];
 
-var createUser = function() {
-  var bandwagoner = flip(.5);
-  var genrepreference = genres[randomInteger(7)];
-  var user = {bandwagon: bandwagoner, genre: genrepreference};
-  return user;
-}
+var createUser = mem(function() {
+  var b = Uniform({a:0,b:1})
+  var bandwagoner = sample(b);
+  var genrepreference = genres[randomInteger(7)];
+  var user = {bandwagon: bandwagoner, genre: genrepreference};
+  return user;
+})
 
 var reads = function(book, newUser) {
-  var genreweight = (book.genre == newUser.genre)? 0.8 : 0.2;
-  var bandwagonweight = (newUser.bandwagon && book.popular) ? 0.9 : (newUser.bandwagon == false) ? 0.5 : 0.1;
-  var avg = (genreweight + bandwagonweight) / 2;
-  return flip(avg);
+  var genreweight = (book.genre == newUser.genre)? 1 : 0;
+  var bandwagonweight = book.popular ? newUser.bandwagon : 0;
+  var p = 0.5 + (genreweight / 4) + (bandwagonweight / 4)
+  return flip(p);
 }
 
 var readBook = function() {
@@ -28,4 +29,5 @@ var readBook = function() {
   return reads(book, newUser);
 }
 
-viz(Infer({method: 'enumerate'}, function(){return readBook()}));
+var first = Infer({method: 'forward'}, function(){return readBook()});
+viz(first)

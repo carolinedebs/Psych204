@@ -1,0 +1,37 @@
+/* Make an "other" bucket */
+
+var total_num_books = all_classics.length + all_fantasy.length + all_fiction.length + all_non_fiction.length + all_young_adult.length + all_science_fiction.length + all_mystery.length + all_humor.length ;
+
+var percent_classic = all_classics.length/total_num_books;
+var percent_fantasy = all_fantasy.length/total_num_books;
+var percent_fiction = all_fiction.length/total_num_books;
+var percent_nonfiction = all_non_fiction.length/total_num_books;
+var percent_youngadult = all_young_adult.length/total_num_books;
+var percent_sciencefiction = all_science_fiction.length/total_num_books;
+var percent_mystery = all_mystery.length/total_num_books;
+var percent_humor = all_humor.length/total_num_books;
+
+
+display("****************************************************");
+
+display("Percentage of books in each genre that were rated 5 of 5")
+display(" ")
+display("classics: " + classics_favorable.length/classics_num.length)
+display("fantasy: " + fantasy_favorable.length/fantasy_num.length)
+display("fiction: " + fiction_favorable.length/fiction_num.length)
+display("non-fiction: " + nonfict_favorable.length/all_non_fiction_num.length)
+display("young adult: " + ya_favorable.length/ya_num.length)
+display("scifi: " + scifi_favorable.length/scifi_num.length)
+display("mystery: " + mystery_favorable.length/mystery_num.length)
+display("humor: " + humor_favorable.length/humor_num.length)
+
+var total_num_books = tr_classics.length + tr_fantasy.length + tr_fiction.length + tr_non_fiction.length + tr_young_adult.length + tr_science_fiction.length + tr_mystery.length + tr_humor.length ;
+
+var percent_classic = tr_classics.length/total_num_books;
+var percent_fantasy = tr_fantasy.length/total_num_books;
+var percent_fiction = tr_fiction.length/total_num_books;
+var percent_nonfiction = tr_non_fiction.length/total_num_books;
+var percent_youngadult = tr_young_adult.length/total_num_books;
+var percent_sciencefiction = tr_science_fiction.length/total_num_books;
+var percent_mystery = tr_mystery.length/total_num_books;
+var percent_humor = tr_humor.length/total_num_books;
