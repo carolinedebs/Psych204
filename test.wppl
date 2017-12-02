@@ -12,12 +12,10 @@ var getResults = function() {
 
 	if (users_books.length > 7) {
 
-		// Read in the books_tags.csv to get the tag info on each of the books the user has rated.
-
+		/* Read in the books_tags.csv to get the tag info on each of the books the user has rated */
 		var user_books_only = map(function(x) { return x[0]; }, users_books);
 		var each_book_tags = filter(function(x) {if (user_books_only.indexOf(x[0]) !== -1) return x;}, book_tags)
 		var each_book_tags = remove(undefined, each_book_tags);
-
 		var classics = filter(function(x) {if (x[1] === classics) return x;}, each_book_tags);
 		var fantasy = filter(function(x) {if (x[1] === fantasy) return x;}, each_book_tags); 
 		var fic = filter(function(x) {if (x[1] === fiction) return x;}, each_book_tags);
@@ -26,16 +24,13 @@ var getResults = function() {
 		var scifi = filter(function(x) {if (x[1] === science_fiction) return x;}, each_book_tags);
 		var mystery = filter(function(x) {if (x[1] === mystery) return x;}, each_book_tags);
 		var humor = filter(function(x) {if (x[1] === humor) return x;}, each_book_tags);
-
 		// display("There are " + user_books_only.length + " books we will train on for User " + user_id );
 
 
-		// Get the genre preference of the user
-
+		/* Get the genre preference of the user */
 		var all = [classics.length, fantasy.length, fic.length, nfic.length, ya.length, scifi.length, mystery.length, humor.length];
 		var all = sort(all, gt);
 		var genrepref = -1;
-
 		if (all[0] === classics.length) var genrepref = "classics"
 		if (all[0] > 0 && all[0] === fantasy.length) var genrepref = "fantasy";
 		if (all[0] > 0 && all[0] === fic.length) var genrepref = "fic";
@@ -44,14 +39,14 @@ var getResults = function() {
 		if (all[0] > 0 && all[0] === scifi.length) var genrepref = "scifi";
 		if (all[0] > 0 && all[0] === mystery.length) var genrepref = "mystery";
 		if (all[0] > 0 && all[0] === humor.length) var genrepref = "humor"; 
-		// Get the popularity rating of the user (popular books (500k+ ratings) / all books on shelf) 
-
+		
+		/* Get the popularity rating of the user (popular books (500k+ ratings) / all books on shelf)  */ 
 		var each_book = filter(function(x) {if (user_books_only.indexOf(x[0]) !== -1) return x;}, books);
 		var each_book = filter(function(x) {if (x[13] > 500000) return x;}, each_book);
 		var bandwagoner_ratio = each_book.length / user_books_only.length;
 		// display(bandwagoner_ratio);
 
-
+		/* Create a new user */ 
 		var createUser = mem(function() {
 		  var bandwagoner = bandwagoner_ratio;
 		  var genrepreference = genrepref;
@@ -59,9 +54,9 @@ var getResults = function() {
 		  return user;
 		})
 
+		/* Get popularity and genre of plucked book */ 
 		var plucked_book = map(function(x) { return x[0]; }, plucked);
 		var each_book_tags = filter(function(x) {if (plucked_book.indexOf(x[0]) !== -1) return x;}, book_tags)
-
 		var classics = filter(function(x) {if (x[1] === classics) return x;}, each_book_tags);
 		var fantasy = filter(function(x) {if (x[1] === fantasy) return x;}, each_book_tags); 
 		var fic = filter(function(x) {if (x[1] === fiction) return x;}, each_book_tags);
@@ -70,11 +65,9 @@ var getResults = function() {
 		var scifi = filter(function(x) {if (x[1] === science_fiction) return x;}, each_book_tags);
 		var mystery = filter(function(x) {if (x[1] === mystery) return x;}, each_book_tags);
 		var humor = filter(function(x) {if (x[1] === humor) return x;}, each_book_tags);
-
 		var all = [classics.length, fantasy.length, fic.length, nfic.length, ya.length, scifi.length, mystery.length, humor.length];
 		var all = sort(all, gt);
-		var genrepref = -1;
-
+		var genrepref = "";
 		if (all[0] === classics.length) var genrepref = "classics"
 		if (all[0] > 0 && all[0] === fantasy.length) var genrepref = "fantasy";
 		if (all[0] > 0 && all[0] === fic.length) var genrepref = "fic";
@@ -83,7 +76,6 @@ var getResults = function() {
 		if (all[0] > 0 && all[0] === scifi.length) var genrepref = "scifi";
 		if (all[0] > 0 && all[0] === mystery.length) var genrepref = "mystery";
 		if (all[0] > 0 && all[0] === humor.length) var genrepref = "humor"; 
-
 		var each_book = filter(function(x) {if (plucked.indexOf(x[0]) !== -1) return x;}, books);
 		var each_book = filter(function(x) {if (x[13] > 500000) return x;}, each_book);
 
@@ -101,9 +93,7 @@ var getResults = function() {
 		  var book = {genre: bookgenre, popular: popularity}; // Put data from real book here
 		  return reads(book, newUser);
 		}
-
 		readBook();
-
 	} else {
 		getResults();
 	}
@@ -119,6 +109,7 @@ var science_fiction = '26837';
 var mystery         = '20939';
 var humor           = '15048';
 
+/* The CSV files */
 var ratings   = csv.read('ratings.csv');
 var book_tags = csv.read('book_tags.csv');
 var books     = csv.read('books.csv');
