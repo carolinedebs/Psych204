@@ -1,7 +1,7 @@
 /* 
 *  Authors: Caroline Debs and Julia Rosedale
 *  Description: Generative model of whether a person will read a randomly-given book based on their previous activity
-*  Date: November 2017
+*  Date: November/December 2017
 */
 
 var genres = ['classics', 'fantasy', 'fiction', 'nonfiction', 'YA', 'scifi', 'mystery', 'humor'];
