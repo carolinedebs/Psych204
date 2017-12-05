@@ -16,8 +16,9 @@ var createUser = (function() {
 var reads = function(book, newUser) {
   var uniform = Uniform({a:0,b:1});
   var beta = Beta({a:8, b:1});
+  var beta2 = Beta({a:1, b:6});
   var utility = (10 * ((newUser.bandwagon * (flip(book.popular) ? sample(beta) : 0)) 
-  + ((1-newUser.bandwagon) * ((book.genre == newUser.genre) ? 1 : sample(uniform)))));
+  + ((1-newUser.bandwagon) * ((book.genre == newUser.genre) ? 1 : sample(beta2)))));
   return Math.floor(utility);
 }
 
