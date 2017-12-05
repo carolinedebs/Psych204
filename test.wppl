@@ -43,14 +43,14 @@ var getResults = function() {
 
 		var all = [classics.length, fantasy.length, fic.length, nfic.length, ya.length, scifi.length, mystery.length, humor.length];
 		var all = sort(all, gt);
-		if (all[0] == classics.length) display("User genre preference: " + genrepref);
-		if (all[0] == fantasy.length) display("User genre preference: " + genrepref);
-		if (all[0] == fic.length) display("User genre preference: " + genrepref);
-		if (all[0] == nfic.length) display("User genre preference: " + genrepref);
-		if (all[0] == ya.length) display("User genre preference: " + genrepref);
-		if (all[0] == scifi.length) display("User genre preference: " + genrepref);
-		if (all[0] == mystery.length) display("User genre preference: " + genrepref);
-		if (all[0] == humor.length) display("User genre preference: " + genrepref);
+		if (all[0] == classics.length) display("User genre preference: classics");
+		if (all[0] == fantasy.length) display("User genre preference: fantasy");
+		if (all[0] == fic.length) display("User genre preference: fiction");
+		if (all[0] == nfic.length) display("User genre preference: nonfiction");
+		if (all[0] == ya.length) display("User genre preference: young adult");
+		if (all[0] == scifi.length) display("User genre preference: science fiction");
+		if (all[0] == mystery.length) display("User genre preference: mystery");
+		if (all[0] == humor.length) display("User genre preference: humor");
 		
 
 		/***** Get the popularity rating of the user (popular books (500k+ ratings) / all books on shelf) *****/
@@ -60,6 +60,7 @@ var getResults = function() {
 		var bandwagoner_ratio = each_book.length / user_books_only.length;
 
 		display("User bandwagon ratio: " + bandwagoner_ratio);
+
 
 		/***** Get popularity and genre of plucked book *****/
 
@@ -76,14 +77,14 @@ var getResults = function() {
 		var all = [classics.length, fantasy.length, fic.length, nfic.length, ya.length, scifi.length, mystery.length, humor.length];
 		var all = sort(all, gt);
 
-		if (all[0] == classics.length) display("Plucked book genre: " + genrepref);
-		if (all[0] == fantasy.length) display("Plucked book genre: " + genrepref);
-		if (all[0] == fic.length) display("Plucked book genre: " + genrepref);
-		if (all[0] == nfic.length) display("Plucked book genre: " + genrepref);
-		if (all[0] == ya.length) display("Plucked book genre: " + genrepref);
-		if (all[0] == scifi.length) display("Plucked book genre: " + genrepref);
-		if (all[0] == mystery.length) display("Plucked book genre: " + genrepref);
-		if (all[0] == humor.length) display("Plucked book genre: " + genrepref);
+		if (all[0] == classics.length) display("Plucked book genre: classics");
+		if (all[0] == fantasy.length) display("Plucked book genre: fantasy");
+		if (all[0] == fic.length) display("Plucked book genre: fiction");
+		if (all[0] == nfic.length) display("Plucked book genre: nonfiction");
+		if (all[0] == ya.length) display("Plucked book genre: young adult");
+		if (all[0] == scifi.length) display("Plucked book genre: science fiction");
+		if (all[0] == mystery.length) display("Plucked book genre: mystery");
+		if (all[0] == humor.length) display("Plucked book genre: humor");
 
 		var each_book = filter(function(x) {if (plucked[0] == x[0]) return x;}, books);
 		var each_book = filter(function(x) {if (x[13] > 500000) return x;}, each_book);

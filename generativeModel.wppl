@@ -1,31 +1,30 @@
 /* 
 *  Authors: Caroline Debs and Julia Rosedale
 *  Description: Generative model of whether a person will read a randomly-given book based on their previous activity
-*  Date: November/December 2017
+*  Date: December 2017
 */
 
 var genres = ['classics', 'fantasy', 'fiction', 'nonfiction', 'YA', 'scifi', 'mystery', 'humor'];
 
-var createUser = mem(function() {
-  var b = Uniform({a:0,b:1})
-  var bandwagoner = sample(b)
-  var genrepreference = genres[randomInteger(7)];
+var createUser = (function() {
+  var bandwagoner = 0.5;
+  var genrepreference = 'YA';
   var user = {bandwagon: bandwagoner, genre: genrepreference};
   return user;
 })
 
 var reads = function(book, newUser) {
-  var genreweight = (book.genre == newUser.genre)? 1 : 0.1;
-  var bandwagonweight = book.popular ? newUser.bandwagon : 0;
-  var weight = 10 * ((genreweight / 3) + (2 * bandwagonweight / 3))
-  var bucket = Math.ceil(weight)
-  return bucket;
+  var uniform = Uniform({a:0,b:1});
+  var beta = Beta({a:8, b:1});
+  var utility = (10 * newUser.bandwagon * (flip(book.popular) ? sample(beta) : 0) )
+  + ((1-newUser.bandwagon) * ((book.genre == newUser.genre) ? 1 : sample(uniform)));
+  return Math.floor(utility);
 }
 
-var readBook = mem(function() {
+var readBook = (function() {
   var newUser = createUser();
-  var bookgenre = genres[randomInteger(7)];
-  var popularity = flip(0.2);
+  var bookgenre = 'YA';
+  var popularity = (10000 - 200)/10000; 
   var book = {genre: bookgenre, popular: popularity};
   return reads(book, newUser);
 })
