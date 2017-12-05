@@ -53,10 +53,10 @@ var getResults = function() {
 		if (all[0] == humor.length) display("User genre preference: humor");
 		
 
-		/***** Get the popularity rating of the user (popular books (500k+ ratings) / all books on shelf) *****/
+		/***** Get the popularity rating of the user *****/
 
 		var each_book = filter(function(x) {if (user_books_only.indexOf(x[0]) !== -1) return x;}, books);
-		var each_book = filter(function(x) {if (x[0] > 500) return x;}, each_book);
+		var each_book = filter(function(x) {if (x[0] < 500) return x;}, each_book);
 		var bandwagoner_ratio = each_book.length / user_books_only.length;
 
 		display("User bandwagon ratio: " + bandwagoner_ratio);
@@ -87,9 +87,9 @@ var getResults = function() {
 		if (all[0] == humor.length) display("Plucked book genre: humor");
 
 		var each_book = filter(function(x) {if (plucked[0] == x[0]) return x;}, books);
-		var each_book = filter(function(x) {if (x[0] > 500) return x;}, each_book);
+		//var each_book = filter(function(x) {if (x[0] < 500) return x;}, each_book);
 
-		display("Plucked book popularity: " + each_book.length)
+		display("Plucked book popularity: " + each_book[0][0])
 
 	} else {
 
